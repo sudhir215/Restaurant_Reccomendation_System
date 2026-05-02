@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant Recommendation System</title>
+    <style>
+        /* GLOBAL */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: #f8fafc;
+        }
+
+
+        .navbar {
+            background: #0f172a;
+            color: white;
+            padding: 18px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .navbar a {
+            color: #cbd5f5;
+            margin-left: 25px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .navbar a:hover {
+            color: white;
+        }
+
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px;
+            gap: 40px;
+        }
+
+        /* TEXT */
+        .text {
+            width: 150%;
+        }
+
+        .text h1 {
+            font-size: 45px;
+            margin-bottom: 20px;
+        }
+
+        .text p {
+            color: #6b7280;
+            font-size: 25px;
+            line-height: 1.7;
+            max-width: 1200px;
+        }
+
+        /* BUTTON */
+        .btn {
+            margin-top: 25px;
+            padding: 12px 26px;
+            background: #0f172a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e293b;
+        }
+
+        /* IMAGE */
+        .image {
+            width: 85%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .image img {
+            width: 100%;
+            max-width: 550px;
+            /* 🔥 bigger */
+            border-radius: 12px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <h2>Restaurant Recommendation System</h2>
+        <div>
+            <a href="/">Home</a>
+            <a href="/recommend">Recommend</a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <!-- LEFT TEXT -->
+        <div class="text">
+            <h1>Build recommendation system with ease!</h1>
+
+            <p>
+                In this age of information overload, people use a variety of stratergies to make choices about what to
+                buy, how to spend their leisure time, and even where to go. Recommender systems automate some of these
+                stratergies with the goal of providing affordable, The aim is to create a content-based recommender
+                system in which when we will write a restaurant name, the Recommender system will look at the reviews of
+                other restaurants, and the System will recommend us other restaurants with similar reviews and sort them
+                from the highest-rated.
+            </p>
+
+
+
+            <form action="/recommend" method="get">
+                <p><strong>Test the system</strong> <button class="btn">Recommend</button></p>
+
+            </form>
+        </div>
+
+        <!-- RIGHT IMAGE -->
+        <div class="image">
+            <img src="{{ url_for('static', filename='image1.png') }}" alt="Food">
+        </div>
+
+    </div>
+
+</body>
+
+</html>

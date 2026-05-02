@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Results</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f8fafc;
+}
+
+/* NAVBAR */
+.navbar {
+    background: #0f172a;
+    color: white;
+    padding: 18px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;   /* 🔥 IMPORTANT */
+}
+
+.navbar h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.navbar a {
+    color: #cbd5f5;
+    margin-left: 25px;
+    text-decoration: none;
+    font-weight: 500;   /* 🔥 IMPORTANT */
+}
+
+.navbar a:hover {
+    color: white;
+}
+
+/* CONTAINER */
+.container {
+    padding: 40px;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background: #e5e7eb;
+}
+
+/* TITLE */
+.title {
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <h2>Restaurant Recommendation System</h2>
+    <div>
+        <a href="/">Home</a>
+        <a href="/recommend">Recommend</a>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="title">Here is Recommended Restaurants</div>
+
+    {% if restaurants %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Cuisines</th>
+            <th>Rating</th>
+            <th>Cost</th>
+        </tr>
+
+        {% for restaurant in restaurants %}
+        <tr>
+            <td>{{ restaurant.name }}</td>
+            <td>{{ restaurant.cuisines }}</td>
+            <td>{{ restaurant.rate }}</td>
+            <td>₹{{ restaurant.cost }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>No results found</p>
+    {% endif %}
+
+</div>
+
+</body>
+</html>

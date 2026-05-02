@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Restaurant Recommendation System</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: 
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url('{{ url_for("static", filename="image.jpeg") }}');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+}
+
+.navbar {
+    background: #0f172a;
+    color: white;
+    padding: 18px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;   /* 🔥 IMPORTANT */
+}
+
+.navbar h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.navbar a {
+    color: #cbd5f5;
+    margin-left: 25px;
+    text-decoration: none;
+    font-weight: 500;   /* 🔥 IMPORTANT */
+}
+
+.navbar a:hover {
+    color: white;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.box {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    width: 400px;
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 12px;
+    width: 100%;
+    background: #0f172a;
+    color: white;
+}
+
+/* MESSAGE */
+.msg {
+    margin-top: 10px;
+    color: red;
+    font-size: 14px;
+}
+</style>
+
+<script>
+let userLocation = "";
+
+// disable button initially
+window.onload = function () {
+    document.getElementById("searchBtn").disabled = true;
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(success, error);
+    } else {
+        showMessage("Geolocation not supported");
+    }
+};
+
+function success(position) {
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+
+    fetch(`/get_location?lat=${lat}&lon=${lon}`)
+        .then(res => res.json())
+        .then(data => {
+            userLocation = data.location;
+
+            document.getElementById("hiddenLocation").value = userLocation;
+
+            document.getElementById("msg").innerText = "Location detected: " + userLocation;
+
+            // ✅ ENABLE BUTTON AFTER LOCATION READY
+            document.getElementById("searchBtn").disabled = false;
+        });
+}
+
+function error() {
+    showMessage("Please allow location access");
+}
+
+// prevent submit if still empty
+function validateForm() {
+    if (!userLocation) {
+        showMessage("Waiting for location...");
+        return false;
+    }
+    return true;
+}
+
+function showMessage(text) {
+    document.getElementById("msg").innerText = text;
+}
+</script>
+</head>
+
+<body>
+
+<div class="navbar">
+    <h2>Restaurant Recommendation System</h2>
+    <div>
+        <a href="/">Home</a>
+        <!-- <a href="/recommend">Recommend</a> -->
+    </div>
+</div>
+
+<div class="container">
+    <div class="box">
+        <h2>Search Restaurant</h2>
+
+        <form action="/recommend" method="post" onsubmit="return validateForm()">
+            
+            <input type="text" name="restaurant" placeholder="Enter restaurant..." required>
+
+            <!-- HIDDEN LOCATION -->
+            <input type="hidden" id="hiddenLocation" name="location">
+
+            <button type="submit" id="searchBtn">Search</button>
+
+            <div id="msg" class="msg"></div>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+This Porjct help for reccomend best hotel near you 
+
+
+ the librarires used in project
+ pandas 
+ scikitln
+ flask 
+
+
+ langauge 
+ python 
+
+
+The dataset i don't push on git repo because of the size is big 
+Here i create environment for save database ,also add some some output screenshots
